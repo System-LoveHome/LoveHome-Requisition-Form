@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase Requisition Form — LoveHome Real Estate</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:         #C8102E;
+      --red-dark:    #a00d24;
+      --red-light:   #fdf0f2;
+      --red-mid:     #f5c6cc;
+      --gold:        #B8952A;
+      --gold-light:  #fdf8ec;
+      --gold-mid:    #e8d49a;
+      --bg:          #f8f6f2;
+      --surface:     #ffffff;
+      --surface-2:   #faf9f7;
+      --border:      rgba(0,0,0,0.08);
+      --border-md:   rgba(0,0,0,0.15);
+      --text-primary:   #1a1410;
+      --text-secondary: #5a524a;
+      --text-tertiary:  #9a9088;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Consolas', 'Courier New', monospace;
+    }
+
+    html, body { height: auto; overflow: visible; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text-primary);
+      padding: 1rem 0.75rem 1.5rem;
+    }
+
+    .page-wrap { max-width: 820px; margin: 0 auto; }
+
+    /* ── Header ── */
+    .form-header {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      border-top: 3px solid var(--red);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+
+    .logo-wrap {
+      display: flex; align-items: center; gap: 12px; flex: 1; min-width: 200px;
+    }
+
+    .logo-img {
+      height: 52px; width: auto; object-fit: contain; flex-shrink: 0;
+    }
+
+    .header-divider {
+      width: 1px; height: 40px; background: var(--border-md); flex-shrink: 0;
+    }
+
+    .header-text {}
+    .header-text h1 {
+      font-size: 17px; font-weight: 700; color: var(--text-primary);
+      letter-spacing: -0.01em; line-height: 1.2;
+    }
+
+    .header-text p {
+      font-size: 11.5px; color: var(--text-tertiary); margin-top: 3px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .card-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.09em;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 8px;
+    }
+
+    .card-title::after { content: ''; flex: 1; height: 0.5px; background: var(--red-mid); }
+
+    /* ── Grid ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+    /* ── Fields ── */
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label { font-size: 12px; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.01em; }
+
+    .field input, .field select {
+      height: 40px; padding: 0 12px;
+      border: 0.5px solid var(--border-md); border-radius: var(--radius-sm);
+      font-size: 14px; font-family: var(--font); color: var(--text-primary);
+      background: var(--surface); transition: border-color 0.15s, box-shadow 0.15s;
+      width: 100%; appearance: none; -webkit-appearance: none;
+    }
+
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a9088' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px;
+    }
+
+    .field input:focus, .field select:focus {
+      outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,16,46,0.10);
+    }
+
+    .field input::placeholder { color: var(--text-tertiary); }
+
+    .field textarea {
+      padding: 10px 12px; border: 0.5px solid var(--border-md); border-radius: var(--radius-sm);
+      font-size: 14px; font-family: var(--font); color: var(--text-primary);
+      background: var(--surface); resize: vertical; min-height: 40px; width: 100%;
+      transition: border-color 0.15s, box-shadow 0.15s; line-height: 1.5;
+    }
+
+    .field textarea:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,16,46,0.10); }
+    .field textarea::placeholder { color: var(--text-tertiary); }
+
+    /* ── SKU ── */
+    .sku-table-wrap {
+      background: var(--surface-2); border: 0.5px solid var(--border);
+      border-radius: var(--radius-md); overflow: hidden;
+    }
+
+    .sku-col-header {
+      display: grid; grid-template-columns: 36px 2fr 2.5fr 80px 36px;
+      gap: 8px; padding: 8px 12px;
+      border-bottom: 0.5px solid var(--border); background: var(--bg);
+    }
+
+    .sku-col-header span {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; color: var(--text-tertiary);
+    }
+
+    .sku-col-header span:last-child { opacity: 0; }
+
+    #sku-rows { padding: 8px 12px 4px; }
+
+    .sku-row {
+      display: grid; grid-template-columns: 36px 2fr 2.5fr 80px 36px;
+      gap: 8px; margin-bottom: 7px; align-items: center;
+    }
+
+    .row-num { font-size: 12px; color: var(--text-tertiary); text-align: center; font-family: var(--font-mono); font-weight: 500; }
+
+    .sku-row input {
+      height: 38px; padding: 0 10px; border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-sm); font-size: 13px; font-family: var(--font);
+      color: var(--text-primary); background: var(--surface); width: 100%;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    .sku-row input.sku-code { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.02em; }
+    .sku-row input.qty { text-align: center; }
+    .sku-row input:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,16,46,0.10); }
+    .sku-row input::placeholder { color: var(--text-tertiary); font-family: var(--font); font-size: 11px; }
+
+    .remove-btn {
+      width: 32px; height: 32px; border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-sm); background: transparent; cursor: pointer;
+      color: var(--text-tertiary); font-size: 18px; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s; flex-shrink: 0;
+    }
+
+    .remove-btn:hover { background: var(--red-light); color: var(--red); border-color: var(--red-mid); }
+
+    /* ── SKU Footer ── */
+    .sku-footer { border-top: 0.5px solid var(--border); }
+
+    .sku-footer-top {
+      padding: 10px 12px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+
+    .add-sku-btn {
+      display: flex; align-items: center; gap: 7px;
+      border: 0.5px dashed var(--border-md); background: transparent;
+      border-radius: var(--radius-sm); padding: 7px 14px;
+      font-size: 13px; font-family: var(--font); color: var(--text-secondary);
+      cursor: pointer; transition: all 0.15s;
+    }
+
+    .add-sku-btn:hover { background: var(--red-light); color: var(--red); border-style: solid; border-color: var(--red-mid); }
+
+    .sku-count { font-size: 12px; color: var(--text-tertiary); }
+    .sku-count strong { color: var(--text-secondary); }
+
+    /* ── Total Qty Bar ── */
+    .total-qty-bar {
+      border-top: 0.5px solid var(--border);
+      padding: 12px 14px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: linear-gradient(90deg, var(--red-light) 0%, var(--surface) 100%);
+      gap: 12px;
+    }
+
+    .total-qty-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--red);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .total-qty-label::before {
+      content: '';
+      display: inline-block; width: 3px; height: 15px;
+      background: var(--gold); border-radius: 2px;
+    }
+
+    .total-qty-value { display: flex; align-items: baseline; gap: 5px; }
+
+    .total-qty-number {
+      font-family: var(--font-mono); font-size: 28px; font-weight: 700;
+      color: var(--red); line-height: 1; min-width: 40px; text-align: right;
+      transition: color 0.2s;
+    }
+
+    .total-qty-number.zero { color: var(--text-tertiary); }
+    .total-qty-unit { font-size: 12px; color: var(--text-tertiary); font-weight: 500; }
+
+    /* ── Upload ── */
+    .upload-zone {
+      border: 1.5px dashed var(--border-md); border-radius: var(--radius-md);
+      padding: 2rem 1rem; text-align: center; cursor: pointer;
+      transition: all 0.2s; background: var(--surface-2); position: relative;
+    }
+
+    .upload-zone:hover { border-color: var(--red); background: var(--red-light); }
+    .upload-zone.has-file { border-color: #82c99a; background: #f0faf4; border-style: solid; }
+
+    .upload-zone input[type=file] {
+      position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;
+    }
+
+    .upload-icon { font-size: 28px; margin-bottom: 8px; display: block; }
+    .upload-text { font-size: 14px; font-weight: 500; color: var(--text-secondary); }
+    .upload-sub { font-size: 12px; color: var(--text-tertiary); margin-top: 4px; }
+
+    .upload-preview {
+      display: none; margin-top: 12px; border-radius: var(--radius-sm);
+      overflow: hidden; border: 0.5px solid var(--border-md);
+    }
+
+    .upload-preview img { width: 100%; max-height: 200px; object-fit: contain; background: #f0f0f0; display: block; }
+
+    .upload-preview-info {
+      padding: 8px 12px; background: var(--surface); font-size: 12px;
+      color: var(--text-secondary); display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .remove-img-btn {
+      background: transparent; border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-sm); padding: 3px 10px;
+      font-size: 11px; color: var(--red); cursor: pointer; font-family: var(--font); transition: all 0.15s;
+    }
+
+    .remove-img-btn:hover { background: var(--red-light); border-color: var(--red-mid); }
+
+    .upload-progress { display: none; margin-top: 10px; background: var(--border); border-radius: 99px; height: 4px; overflow: hidden; }
+    .upload-progress-bar { height: 100%; background: var(--red); border-radius: 99px; width: 0%; transition: width 0.3s ease; }
+
+    /* ── Priority ── */
+    .priority-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .priority-opt input[type=radio] { display: none; }
+
+    .priority-opt label {
+      display: block; text-align: center; padding: 10px 8px;
+      border: 0.5px solid var(--border-md); border-radius: var(--radius-sm);
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      color: var(--text-secondary); background: var(--surface); transition: all 0.15s;
+    }
+
+    .priority-opt label:hover { background: var(--surface-2); }
+    .priority-opt input:checked + label.urgent { background: var(--red-light); color: var(--red); border-color: var(--red-mid); }
+    .priority-opt input:checked + label.regular { background: var(--gold-light); color: var(--gold); border-color: var(--gold-mid); }
+    .priority-opt input:checked + label.low { background: #f0faf4; color: #1e6e3e; border-color: #82c99a; }
+
+    /* ── Submit bar ── */
+    .submit-bar {
+      background: var(--surface); border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg); border-bottom: 3px solid var(--gold);
+      padding: 1.1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+
+    .submit-bar-left { font-size: 13px; color: var(--text-tertiary); }
+    .btn-row { display: flex; gap: 10px; align-items: center; }
+
+    .btn-reset {
+      background: transparent; border: 0.5px solid var(--border-md);
+      border-radius: var(--radius-sm); padding: 0 18px; height: 42px;
+      font-size: 13px; font-family: var(--font); color: var(--text-secondary);
+      cursor: pointer; transition: all 0.15s;
+    }
+
+    .btn-reset:hover { background: var(--surface-2); }
+
+    .btn-submit {
+      background: var(--red); border: none; border-radius: var(--radius-sm);
+      padding: 0 28px; height: 42px; font-size: 14px; font-weight: 700;
+      font-family: var(--font); color: #fff; cursor: pointer;
+      transition: background 0.15s, transform 0.1s; letter-spacing: 0.02em;
+    }
+
+    .btn-submit:hover { background: var(--red-dark); }
+    .btn-submit:active { transform: scale(0.98); }
+    .btn-submit:disabled { background: #e8a0a8; cursor: not-allowed; transform: none; }
+
+    /* ── Toast ── */
+    .toast {
+      position: fixed; bottom: 20px; right: 16px; left: 16px;
+      background: #1e6e3e; color: #fff; padding: 12px 18px;
+      border-radius: var(--radius-md); font-size: 14px; font-weight: 500;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.18); display: none; z-index: 999; text-align: center;
+    }
+
+    .toast.error { background: var(--red); }
+    .toast.sending { background: #7d5e0a; }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      body { padding: 0.6rem 0.4rem 0.8rem; }
+      .form-header { padding: 1rem; gap: 12px; }
+      .logo-img { height: 40px; }
+      .header-text h1 { font-size: 14px; }
+      .card { padding: 0.9rem 1rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 10px; }
+      .sku-col-header { display: none; }
+      #sku-rows { padding: 8px 8px 4px; }
+      .sku-row {
+        display: grid; grid-template-columns: 1fr 80px 32px;
+        grid-template-rows: auto auto; gap: 6px;
+        padding: 10px; background: var(--surface);
+        border: 0.5px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 8px;
+      }
+      .row-num { display: none; }
+      .sku-row input.sku-code { grid-column: 1/2; grid-row: 1; }
+      .sku-row input.qty { grid-column: 2/3; grid-row: 1; text-align: center; }
+      .remove-btn { grid-column: 3/4; grid-row: 1; width: 28px; height: 38px; font-size: 16px; }
+      .sku-row input.desc { grid-column: 1/4; grid-row: 2; }
+      .sku-footer-top { flex-direction: column; align-items: stretch; gap: 8px; padding: 10px 8px; }
+      .add-sku-btn { justify-content: center; padding: 11px; }
+      .sku-count { text-align: center; }
+      .total-qty-number { font-size: 22px; }
+      .priority-grid { gap: 6px; }
+      .priority-opt label { font-size: 12px; padding: 9px 4px; }
+      .submit-bar { flex-direction: column; align-items: stretch; gap: 10px; padding: 1rem; }
+      .submit-bar-left { text-align: center; font-size: 12px; }
+      .btn-row { flex-direction: column; gap: 8px; }
+      .btn-submit, .btn-reset { width: 100%; text-align: center; height: 46px; font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- Header -->
+  <div class="form-header">
+    <div class="logo-wrap">
+      <img class="logo-img" src="https://i.imgur.com/placeholder.png" id="logo-img" alt="LoveHome Real Estate" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex'">
+      <div id="logo-fallback" style="display:flex; align-items:center; gap:6px;">
+        <div style="width:42px;height:42px;border-radius:8px;background:#C8102E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;letter-spacing:0.02em;flex-shrink:0;">LH</div>
+      </div>
+      <div class="header-divider"></div>
+      <div class="header-text">
+        <h1>Purchase Requisition Form</h1>
+        <p>LoveHome Real Estate &nbsp;&middot;&nbsp; Jaipur &amp; Pushkar Projects</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1: Project & Category -->
+  <div class="card">
+    <div class="card-title">Project &amp; Category</div>
+    <div class="grid-3">
+      <div class="field">
+        <label>Project *</label>
+        <select id="project">
+          <option value="">Select project</option>
+          <option value="Jaipur">Jaipur</option>
+          <option value="Pushkar">Pushkar</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Item Category *</label>
+        <select id="item-category" onchange="updateSubCategory()">
+          <option value="">Select category</option>
+          <option value="Civil">Civil</option>
+          <option value="Electric">Electric</option>
+          <option value="Plumbing">Plumbing</option>
+          <option value="Paints">Paints</option>
+          <option value="Furniture">Furniture</option>
+          <option value="Hardware">Hardware</option>
+          <option value="Safety">Safety &amp; PPE</option>
+          <option value="Office">Office &amp; Admin</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Sub-Category</label>
+        <select id="sub-category">
+          <option value="">Select category first</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Requisition Details -->
+  <div class="card">
+    <div class="card-title">Requisition Details</div>
+    <div class="grid-2" style="margin-bottom:12px">
+      <div class="field">
+        <label>Req. No. (PO Number) *</label>
+        <input type="text" id="req-no" placeholder="e.g. PO/2026/045" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>Required Date *</label>
+        <input type="date" id="req-date">
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Filled By *</label>
+        <select id="filled-by">
+          <option value="">Select person</option>
+          <option value="Store Manager">Store Manager</option>
+          <option value="Site Engineer">Site Engineer</option>
+          <option value="Project Manager">Project Manager</option>
+          <option value="Purchase Manager">Purchase Manager</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Notes / Remarks</label>
+        <textarea id="notes" placeholder="Special instructions, vendor preference..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: SKU Items -->
+  <div class="card">
+    <div class="card-title">SKU Items *</div>
+    <div class="sku-table-wrap">
+      <div class="sku-col-header">
+        <span>#</span>
+        <span>SKU Code</span>
+        <span>Description</span>
+        <span style="text-align:center">Quantity</span>
+        <span>.</span>
+      </div>
+      <div id="sku-rows"></div>
+      <div class="sku-footer">
+        <div class="sku-footer-top">
+          <button class="add-sku-btn" onclick="addSkuRow()">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v11M1 6.5h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            Add SKU row
+          </button>
+          <span class="sku-count" id="sku-count">0 rows added</span>
+        </div>
+        <div class="total-qty-bar">
+          <span class="total-qty-label">Total Quantity</span>
+          <div class="total-qty-value">
+            <span class="total-qty-number zero" id="total-qty-number">0</span>
+            <span class="total-qty-unit">units</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 4: Scanned Copy -->
+  <div class="card">
+    <div class="card-title">Scanned Copy of Requisition *</div>
+    <div class="upload-zone" id="upload-zone">
+      <input type="file" id="scan-file" accept="image/*,.pdf" onchange="handleFileSelect(event)">
+      <span class="upload-icon">&#128247;</span>
+      <div class="upload-text">Tap to upload or take a photo</div>
+      <div class="upload-sub">JPG, PNG, PDF &nbsp;&middot;&nbsp; Max 5MB</div>
+    </div>
+    <div class="upload-preview" id="upload-preview">
+      <img id="preview-img" src="" alt="Preview">
+      <div class="upload-preview-info">
+        <span id="file-name-display">—</span>
+        <button class="remove-img-btn" onclick="removeFile()">Remove</button>
+      </div>
+    </div>
+    <div class="upload-progress" id="upload-progress">
+      <div class="upload-progress-bar" id="upload-progress-bar"></div>
+    </div>
+  </div>
+
+  <!-- Section 5: Priority -->
+  <div class="card">
+    <div class="card-title">Priority</div>
+    <div class="priority-grid">
+      <div class="priority-opt">
+        <input type="radio" name="priority" id="p-urgent" value="Urgent">
+        <label for="p-urgent" class="urgent">&#9650; Urgent</label>
+      </div>
+      <div class="priority-opt">
+        <input type="radio" name="priority" id="p-regular" value="Regular" checked>
+        <label for="p-regular" class="regular">&#9679; Regular</label>
+      </div>
+      <div class="priority-opt">
+        <input type="radio" name="priority" id="p-low" value="Low Priority">
+        <label for="p-low" class="low">&#9660; Low</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit Bar -->
+  <div class="submit-bar">
+    <div class="submit-bar-left" id="submit-status">Fill all required fields (*) to submit</div>
+    <div class="btn-row">
+      <button class="btn-reset" onclick="resetForm()">Reset</button>
+      <button class="btn-submit" id="submit-btn" onclick="submitForm()">Submit Requisition</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ════════════════════════════════════════════════
+  //  ▶ PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
+  // ════════════════════════════════════════════════
+  const SHEET_URL = "YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+  // ════════════════════════════════════════════════
+
+  // ── Logo: embed as base64 so it works offline/anywhere ──
+  // Replace the src below with your actual logo image URL or base64
+  // To use your logo: host the image anywhere (Google Drive, GitHub)
+  // and put the direct image URL here:
+  // document.getElementById("logo-img").src = "YOUR_LOGO_URL_HERE";
+  // OR paste a base64 string directly:
+  // document.getElementById("logo-img").src = "data:image/png;base64,...";
+
+  const SUB_CATS = {
+    Civil:     ["Foundation","Masonry","Concrete","Waterproofing","Finishing","Roofing","Flooring"],
+    Electric:  ["Wiring","Panels & MCB","Lighting","Conduits","Earthing","DB & Fittings","Switches & Sockets"],
+    Plumbing:  ["CPVC Pipes","PVC Pipes","UPVC Pipes","Fittings","Valves","Tanks & Pumps","Drainage"],
+    Paints:    ["Interior Emulsion","Exterior Emulsion","Primer","Putty","Texture","Enamel","Wood Polish"],
+    Furniture: ["Site Furniture","Office Furniture","Fixtures","Doors & Windows","Wardrobes","Hardware Fittings"],
+    Hardware:  ["Fasteners","Tools","Locks & Hinges","Glass & Mirrors","Adhesives","Scaffolding"],
+    Safety:    ["Helmets","Gloves","Harness","Safety Nets","Signs & Boards","First Aid","Footwear"],
+    Office:    ["Stationery","Electronics","Housekeeping","Pantry Supplies","Branding Material","IT Equipment"]
+  };
+
+  let selectedFile = null;
+
+  function updateSubCategory() {
+    const cat = document.getElementById("item-category").value;
+    const sel = document.getElementById("sub-category");
+    sel.innerHTML = "";
+    if (!cat) { sel.innerHTML = '<option value="">Select category first</option>'; return; }
+    sel.innerHTML = '<option value="">Select sub-category</option>';
+    (SUB_CATS[cat] || []).forEach(s => {
+      const o = document.createElement("option"); o.value = s; o.textContent = s; sel.appendChild(o);
+    });
+  }
+
+  let rowCount = 0;
+
+  function addSkuRow() {
+    rowCount++;
+    const n = rowCount;
+    const wrap = document.getElementById("sku-rows");
+    const row = document.createElement("div");
+    row.className = "sku-row"; row.id = "row-" + n;
+    const len = document.querySelectorAll(".sku-row").length;
+    row.innerHTML = `
+      <span class="row-num">${len + 1}</span>
+      <input type="text" class="sku-code" placeholder="SKU e.g. 025-ELB-CPVC" oninput="updateCount()" autocomplete="off">
+      <input type="text" class="desc" placeholder="Description (optional)">
+      <input type="number" class="qty" placeholder="Qty" min="1" oninput="updateCount()">
+      <button class="remove-btn" onclick="removeRow(${n})" title="Remove">&#215;</button>
+    `;
+    wrap.appendChild(row);
+    updateRowNumbers(); updateCount(); notifyResize();
+    row.querySelector(".sku-code").focus();
+  }
+
+  function removeRow(id) {
+    const el = document.getElementById("row-" + id);
+    if (el) { el.remove(); updateRowNumbers(); updateCount(); notifyResize(); }
+  }
+
+  function updateRowNumbers() {
+    document.querySelectorAll(".sku-row").forEach((r, i) => {
+      const n = r.querySelector(".row-num"); if (n) n.textContent = i + 1;
+    });
+  }
+
+  function updateCount() {
+    const rows = document.querySelectorAll(".sku-row");
+    let filled = 0, totalQty = 0;
+    rows.forEach(r => {
+      const sku = r.querySelector(".sku-code").value.trim();
+      const qty = parseInt(r.querySelector(".qty").value) || 0;
+      if (sku && qty > 0) filled++;
+      totalQty += qty;
+    });
+    const el = document.getElementById("sku-count");
+    el.innerHTML = "<strong>" + rows.length + "</strong> row" + (rows.length !== 1 ? "s" : "") +
+      (filled > 0 ? " &nbsp;&#183;&nbsp; <strong>" + filled + "</strong> complete" : "");
+    const numEl = document.getElementById("total-qty-number");
+    numEl.textContent = totalQty;
+    numEl.classList.toggle("zero", totalQty === 0);
+  }
+
+  function handleFileSelect(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 5 * 1024 * 1024) { showToast("File too large. Max 5MB allowed.", "error"); return; }
+    selectedFile = file;
+    document.getElementById("file-name-display").textContent = file.name + " (" + (file.size / 1024).toFixed(0) + " KB)";
+    document.getElementById("upload-zone").classList.add("has-file");
+    document.getElementById("upload-zone").querySelector(".upload-text").textContent = "File selected ✓";
+    const preview = document.getElementById("upload-preview");
+    const img = document.getElementById("preview-img");
+    if (file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onload = (ev) => { img.src = ev.target.result; img.style.display = "block"; preview.style.display = "block"; notifyResize(); };
+      reader.readAsDataURL(file);
+    } else {
+      img.style.display = "none"; img.src = ""; preview.style.display = "block"; notifyResize();
+    }
+  }
+
+  function removeFile() {
+    selectedFile = null;
+    document.getElementById("scan-file").value = "";
+    document.getElementById("upload-preview").style.display = "none";
+    document.getElementById("preview-img").src = "";
+    document.getElementById("file-name-display").textContent = "—";
+    document.getElementById("upload-zone").classList.remove("has-file");
+    document.getElementById("upload-zone").querySelector(".upload-text").textContent = "Tap to upload or take a photo";
+    notifyResize();
+  }
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function showToast(msg, type = "success") {
+    const t = document.getElementById("toast");
+    t.textContent = msg; t.className = "toast" + (type !== "success" ? " " + type : "");
+    t.style.display = "block"; clearTimeout(t._timer);
+    t._timer = setTimeout(() => { t.style.display = "none"; }, 5000);
+  }
+
+  function resetForm() {
+    if (!confirm("Reset all form fields? This cannot be undone.")) return;
+    ["project","item-category","req-no","req-date","filled-by","notes"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = "";
+    });
+    updateSubCategory();
+    document.getElementById("p-regular").checked = true;
+    document.getElementById("sku-rows").innerHTML = "";
+    rowCount = 0; updateCount(); removeFile();
+    document.getElementById("submit-status").textContent = "Fill all required fields (*) to submit";
+    addSkuRow(); notifyResize();
+  }
+
+  function collectItems() {
+    const rows = document.querySelectorAll(".sku-row");
+    const items = []; let hasError = false;
+    rows.forEach(r => {
+      const sku = r.querySelector(".sku-code").value.trim();
+      const desc = r.querySelector(".desc").value.trim();
+      const qty = parseInt(r.querySelector(".qty").value);
+      if (sku && qty > 0) items.push({ sku, desc, qty });
+      else if (sku || r.querySelector(".qty").value.trim()) hasError = true;
+    });
+    return { items, hasError };
+  }
+
+  function getTotalQty() {
+    let total = 0;
+    document.querySelectorAll(".sku-row").forEach(r => { total += parseInt(r.querySelector(".qty").value) || 0; });
+    return total;
+  }
+
+  async function submitForm() {
+    const project  = document.getElementById("project").value;
+    const category = document.getElementById("item-category").value;
+    const subCat   = document.getElementById("sub-category").value;
+    const reqNo    = document.getElementById("req-no").value.trim();
+    const reqDate  = document.getElementById("req-date").value;
+    const filledBy = document.getElementById("filled-by").value;
+    const notes    = document.getElementById("notes").value.trim();
+    const priority = document.querySelector('input[name="priority"]:checked')?.value || "Regular";
+    const totalQty = getTotalQty();
+    const { items, hasError } = collectItems();
+
+    if (!project || !category || !reqDate || !filledBy) { showToast("Please fill: Project, Category, Date and Filled By", "error"); return; }
+    if (!reqNo) { showToast("Please enter Req. No. (PO Number)", "error"); return; }
+    if (items.length === 0) { showToast("Add at least one SKU with quantity", "error"); return; }
+    if (hasError) { showToast("Some SKU rows are incomplete — complete or remove them", "error"); return; }
+    if (!selectedFile) { showToast("Please upload the scanned copy of requisition", "error"); return; }
+
+    const btn = document.getElementById("submit-btn");
+    btn.disabled = true; btn.textContent = "Uploading...";
+    document.getElementById("submit-status").textContent = "Uploading image...";
+    showToast("Uploading scanned copy...", "sending");
+
+    const prog = document.getElementById("upload-progress");
+    const progBar = document.getElementById("upload-progress-bar");
+    prog.style.display = "block";
+    let pct = 0;
+    const ticker = setInterval(() => { pct = Math.min(pct + 8, 85); progBar.style.width = pct + "%"; }, 200);
+
+    try {
+      const base64 = await fileToBase64(selectedFile);
+
+      const payload = {
+        reqNo, project, category,
+        subCategory: subCat, requiredDate: reqDate,
+        filledBy, priority, notes,
+        items: items.map(i => i.sku + " × " + i.qty + (i.desc ? " (" + i.desc + ")" : "")).join(" | "),
+        itemsJson: JSON.stringify(items),
+        totalQty,
+        timestamp: new Date().toISOString(),
+        fileName: selectedFile.name,
+        fileType: selectedFile.type,
+        fileData: base64
+      };
+
+      btn.textContent = "Submitting...";
+      document.getElementById("submit-status").textContent = "Sending to Google Sheets...";
+
+      await fetch(SHEET_URL, {
+        method: "POST", mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      clearInterval(ticker);
+      progBar.style.width = "100%";
+      setTimeout(() => { prog.style.display = "none"; progBar.style.width = "0%"; }, 600);
+
+      showToast("✓ Requisition " + reqNo + " submitted successfully!");
+      document.getElementById("submit-status").textContent = "Submitted: " + reqNo + " at " + new Date().toLocaleTimeString();
+
+      ["project","item-category","req-no","req-date","notes"].forEach(id => {
+        const el = document.getElementById(id); if (el) el.value = "";
+      });
+      updateSubCategory();
+      document.getElementById("p-regular").checked = true;
+      document.getElementById("sku-rows").innerHTML = "";
+      rowCount = 0; addSkuRow(); updateCount(); removeFile(); notifyResize();
+
+    } catch (err) {
+      clearInterval(ticker); prog.style.display = "none"; progBar.style.width = "0%";
+      showToast("Submission failed. Check internet connection.", "error");
+      document.getElementById("submit-status").textContent = "Submission failed — try again";
+    } finally {
+      btn.disabled = false; btn.textContent = "Submit Requisition";
+    }
+  }
+
+  function notifyResize() {
+    const h = document.documentElement.scrollHeight;
+    try { window.parent.postMessage({ type: 'setHeight', height: h }, '*'); } catch(e) {}
+    try { window.parent.postMessage({ gsft_h: h }, '*'); } catch(e) {}
+  }
+
+  window.addEventListener('load', notifyResize);
+  window.addEventListener('resize', notifyResize);
+  new MutationObserver(notifyResize).observe(document.body, { childList: true, subtree: true, attributes: true });
+
+  addSkuRow();
+</script>
+</body>
+</html>
