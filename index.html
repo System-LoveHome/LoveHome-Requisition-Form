@@ -8,18 +8,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --red:         #C8102E;
-      --red-dark:    #a00d24;
-      --red-light:   #fdf0f2;
-      --red-mid:     #f5c6cc;
-      --gold:        #B8952A;
-      --gold-light:  #fdf8ec;
-      --gold-mid:    #e8d49a;
-      --bg:          #f8f6f2;
-      --surface:     #ffffff;
-      --surface-2:   #faf9f7;
-      --border:      rgba(0,0,0,0.08);
-      --border-md:   rgba(0,0,0,0.15);
+      --red:          #C8102E;
+      --red-dark:     #a00d24;
+      --red-light:    #fdf0f2;
+      --red-mid:      #f5c6cc;
+      --gold:         #B8952A;
+      --gold-light:   #fdf8ec;
+      --gold-mid:     #e8d49a;
+      --bg:           #f8f6f2;
+      --surface:      #ffffff;
+      --surface-2:    #faf9f7;
+      --border:       rgba(0,0,0,0.08);
+      --border-md:    rgba(0,0,0,0.15);
       --text-primary:   #1a1410;
       --text-secondary: #5a524a;
       --text-tertiary:  #9a9088;
@@ -52,36 +52,16 @@
       display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
     }
 
-    .logo-wrap {
-      display: flex; align-items: center; gap: 12px; flex: 1; min-width: 200px;
-    }
-
-    .logo-img {
-      height: 52px; width: auto; object-fit: contain; flex-shrink: 0;
-    }
-
-    .header-divider {
-      width: 1px; height: 40px; background: var(--border-md); flex-shrink: 0;
-    }
-
-    .header-text {}
-    .header-text h1 {
-      font-size: 17px; font-weight: 700; color: var(--text-primary);
-      letter-spacing: -0.01em; line-height: 1.2;
-    }
-
-    .header-text p {
-      font-size: 11.5px; color: var(--text-tertiary); margin-top: 3px;
-    }
+    .logo-wrap { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 200px; }
+    .logo-img { height: 52px; width: auto; object-fit: contain; flex-shrink: 0; }
+    .header-divider { width: 1px; height: 40px; background: var(--border-md); flex-shrink: 0; }
+    .header-text h1 { font-size: 17px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.01em; line-height: 1.2; }
+    .header-text p { font-size: 11.5px; color: var(--text-tertiary); margin-top: 3px; }
 
     /* ── Cards ── */
     .card {
-      background: var(--surface);
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 1rem;
-      overflow: hidden;
+      background: var(--surface); border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 1rem; overflow: hidden;
     }
 
     .card-title {
@@ -129,45 +109,45 @@
     .field textarea:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,16,46,0.10); }
     .field textarea::placeholder { color: var(--text-tertiary); }
 
-    /* ── SKU ── */
-    .sku-table-wrap {
+    /* ── Item rows ── */
+    .items-table-wrap {
       background: var(--surface-2); border: 0.5px solid var(--border);
       border-radius: var(--radius-md); overflow: hidden;
     }
 
-    .sku-col-header {
-      display: grid; grid-template-columns: 36px 2fr 2.5fr 80px 36px;
+    .items-col-header {
+      display: grid; grid-template-columns: 36px 1fr 120px 36px;
       gap: 8px; padding: 8px 12px;
       border-bottom: 0.5px solid var(--border); background: var(--bg);
     }
 
-    .sku-col-header span {
+    .items-col-header span {
       font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
       text-transform: uppercase; color: var(--text-tertiary);
     }
 
-    .sku-col-header span:last-child { opacity: 0; }
+    .items-col-header span:last-child { opacity: 0; }
 
-    #sku-rows { padding: 8px 12px 4px; }
+    #item-rows { padding: 8px 12px 4px; }
 
-    .sku-row {
-      display: grid; grid-template-columns: 36px 2fr 2.5fr 80px 36px;
+    .item-row {
+      display: grid; grid-template-columns: 36px 1fr 120px 36px;
       gap: 8px; margin-bottom: 7px; align-items: center;
     }
 
     .row-num { font-size: 12px; color: var(--text-tertiary); text-align: center; font-family: var(--font-mono); font-weight: 500; }
 
-    .sku-row input {
+    .item-row input {
       height: 38px; padding: 0 10px; border: 0.5px solid var(--border-md);
       border-radius: var(--radius-sm); font-size: 13px; font-family: var(--font);
       color: var(--text-primary); background: var(--surface); width: 100%;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
 
-    .sku-row input.sku-code { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.02em; }
-    .sku-row input.qty { text-align: center; }
-    .sku-row input:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,16,46,0.10); }
-    .sku-row input::placeholder { color: var(--text-tertiary); font-family: var(--font); font-size: 11px; }
+    .item-row input.item-name { font-size: 13px; }
+    .item-row input.qty { text-align: center; }
+    .item-row input:focus { outline: none; border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,16,46,0.10); }
+    .item-row input::placeholder { color: var(--text-tertiary); font-size: 12px; }
 
     .remove-btn {
       width: 32px; height: 32px; border: 0.5px solid var(--border-md);
@@ -179,15 +159,15 @@
 
     .remove-btn:hover { background: var(--red-light); color: var(--red); border-color: var(--red-mid); }
 
-    /* ── SKU Footer ── */
-    .sku-footer { border-top: 0.5px solid var(--border); }
+    /* ── Items Footer ── */
+    .items-footer { border-top: 0.5px solid var(--border); }
 
-    .sku-footer-top {
+    .items-footer-top {
       padding: 10px 12px;
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
     }
 
-    .add-sku-btn {
+    .add-item-btn {
       display: flex; align-items: center; gap: 7px;
       border: 0.5px dashed var(--border-md); background: transparent;
       border-radius: var(--radius-sm); padding: 7px 14px;
@@ -195,15 +175,14 @@
       cursor: pointer; transition: all 0.15s;
     }
 
-    .add-sku-btn:hover { background: var(--red-light); color: var(--red); border-style: solid; border-color: var(--red-mid); }
+    .add-item-btn:hover { background: var(--red-light); color: var(--red); border-style: solid; border-color: var(--red-mid); }
 
-    .sku-count { font-size: 12px; color: var(--text-tertiary); }
-    .sku-count strong { color: var(--text-secondary); }
+    .item-count { font-size: 12px; color: var(--text-tertiary); }
+    .item-count strong { color: var(--text-secondary); }
 
     /* ── Total Qty Bar ── */
     .total-qty-bar {
-      border-top: 0.5px solid var(--border);
-      padding: 12px 14px;
+      border-top: 0.5px solid var(--border); padding: 12px 14px;
       display: flex; align-items: center; justify-content: space-between;
       background: linear-gradient(90deg, var(--red-light) 0%, var(--surface) 100%);
       gap: 12px;
@@ -216,8 +195,7 @@
     }
 
     .total-qty-label::before {
-      content: '';
-      display: inline-block; width: 3px; height: 15px;
+      content: ''; display: inline-block; width: 3px; height: 15px;
       background: var(--gold); border-radius: 2px;
     }
 
@@ -225,8 +203,7 @@
 
     .total-qty-number {
       font-family: var(--font-mono); font-size: 28px; font-weight: 700;
-      color: var(--red); line-height: 1; min-width: 40px; text-align: right;
-      transition: color 0.2s;
+      color: var(--red); line-height: 1; min-width: 40px; text-align: right; transition: color 0.2s;
     }
 
     .total-qty-number.zero { color: var(--text-tertiary); }
@@ -239,8 +216,10 @@
       transition: all 0.2s; background: var(--surface-2); position: relative;
     }
 
-    .upload-zone:hover { border-color: var(--red); background: var(--red-light); }
+    .upload-zone:hover,
+    .upload-zone.drag-over { border-color: var(--red); background: var(--red-light); }
     .upload-zone.has-file { border-color: #82c99a; background: #f0faf4; border-style: solid; }
+    .upload-zone.drag-over { border-style: solid; transform: scale(1.01); }
 
     .upload-zone input[type=file] {
       position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;
@@ -289,7 +268,7 @@
     .priority-opt input:checked + label.regular { background: var(--gold-light); color: var(--gold); border-color: var(--gold-mid); }
     .priority-opt input:checked + label.low { background: #f0faf4; color: #1e6e3e; border-color: #82c99a; }
 
-    /* ── Submit bar ── */
+    /* ── Submit ── */
     .submit-bar {
       background: var(--surface); border: 0.5px solid var(--border);
       border-radius: var(--radius-lg); border-bottom: 3px solid var(--gold);
@@ -303,8 +282,7 @@
     .btn-reset {
       background: transparent; border: 0.5px solid var(--border-md);
       border-radius: var(--radius-sm); padding: 0 18px; height: 42px;
-      font-size: 13px; font-family: var(--font); color: var(--text-secondary);
-      cursor: pointer; transition: all 0.15s;
+      font-size: 13px; font-family: var(--font); color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
     }
 
     .btn-reset:hover { background: var(--surface-2); }
@@ -339,22 +317,20 @@
       .header-text h1 { font-size: 14px; }
       .card { padding: 0.9rem 1rem; }
       .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 10px; }
-      .sku-col-header { display: none; }
-      #sku-rows { padding: 8px 8px 4px; }
-      .sku-row {
-        display: grid; grid-template-columns: 1fr 80px 32px;
-        grid-template-rows: auto auto; gap: 6px;
-        padding: 10px; background: var(--surface);
+      .items-col-header { display: none; }
+      #item-rows { padding: 8px 8px 4px; }
+      .item-row {
+        display: grid; grid-template-columns: 1fr 90px 32px;
+        gap: 6px; padding: 8px; background: var(--surface);
         border: 0.5px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 8px;
       }
       .row-num { display: none; }
-      .sku-row input.sku-code { grid-column: 1/2; grid-row: 1; }
-      .sku-row input.qty { grid-column: 2/3; grid-row: 1; text-align: center; }
-      .remove-btn { grid-column: 3/4; grid-row: 1; width: 28px; height: 38px; font-size: 16px; }
-      .sku-row input.desc { grid-column: 1/4; grid-row: 2; }
-      .sku-footer-top { flex-direction: column; align-items: stretch; gap: 8px; padding: 10px 8px; }
-      .add-sku-btn { justify-content: center; padding: 11px; }
-      .sku-count { text-align: center; }
+      .item-row input.item-name { grid-column: 1/2; }
+      .item-row input.qty { grid-column: 2/3; text-align: center; }
+      .remove-btn { grid-column: 3/4; width: 28px; height: 38px; font-size: 16px; }
+      .items-footer-top { flex-direction: column; align-items: stretch; gap: 8px; padding: 10px 8px; }
+      .add-item-btn { justify-content: center; padding: 11px; }
+      .item-count { text-align: center; }
       .total-qty-number { font-size: 22px; }
       .priority-grid { gap: 6px; }
       .priority-opt label { font-size: 12px; padding: 9px 4px; }
@@ -372,14 +348,15 @@
   <!-- Header -->
   <div class="form-header">
     <div class="logo-wrap">
-      <img class="logo-img" src="https://i.imgur.com/placeholder.png" id="logo-img" alt="LoveHome Real Estate" onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex'">
-      <div id="logo-fallback" style="display:flex; align-items:center; gap:6px;">
-        <div style="width:42px;height:42px;border-radius:8px;background:#C8102E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;letter-spacing:0.02em;flex-shrink:0;">LH</div>
+      <img class="logo-img" src="logo.jpeg" id="logo-img" alt="LoveHome Real Estate"
+        onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='flex'">
+      <div id="logo-fallback" style="display:none; align-items:center; gap:6px;">
+        <div style="width:42px;height:42px;border-radius:8px;background:#C8102E;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;flex-shrink:0;">LH</div>
       </div>
       <div class="header-divider"></div>
       <div class="header-text">
         <h1>Purchase Requisition Form</h1>
-        <p>LoveHome Real Estate &nbsp;&middot;&nbsp; Jaipur &amp; Pushkar Projects</p>
+        <p>LoveHome Real Estate &nbsp;&middot;&nbsp; Joypur Project</p>
       </div>
     </div>
   </div>
@@ -387,18 +364,17 @@
   <!-- Section 1: Project & Category -->
   <div class="card">
     <div class="card-title">Project &amp; Category</div>
-    <div class="grid-3">
+    <div class="grid-2">
       <div class="field">
         <label>Project *</label>
         <select id="project">
           <option value="">Select project</option>
-          <option value="Jaipur">Jaipur</option>
-          <option value="Pushkar">Pushkar</option>
+          <option value="Joypur">Joypur</option>
         </select>
       </div>
       <div class="field">
         <label>Item Category *</label>
-        <select id="item-category" onchange="updateSubCategory()">
+        <select id="item-category">
           <option value="">Select category</option>
           <option value="Civil">Civil</option>
           <option value="Electric">Electric</option>
@@ -410,12 +386,6 @@
           <option value="Office">Office &amp; Admin</option>
         </select>
       </div>
-      <div class="field">
-        <label>Sub-Category</label>
-        <select id="sub-category">
-          <option value="">Select category first</option>
-        </select>
-      </div>
     </div>
   </div>
 
@@ -424,8 +394,8 @@
     <div class="card-title">Requisition Details</div>
     <div class="grid-2" style="margin-bottom:12px">
       <div class="field">
-        <label>Req. No. (PO Number) *</label>
-        <input type="text" id="req-no" placeholder="e.g. PO/2026/045" autocomplete="off">
+        <label>Requisition No. *</label>
+        <input type="text" id="req-no" placeholder="e.g. REQ/2026/045" autocomplete="off">
       </div>
       <div class="field">
         <label>Required Date *</label>
@@ -451,25 +421,24 @@
     </div>
   </div>
 
-  <!-- Section 3: SKU Items -->
+  <!-- Section 3: Items -->
   <div class="card">
-    <div class="card-title">SKU Items *</div>
-    <div class="sku-table-wrap">
-      <div class="sku-col-header">
+    <div class="card-title">Items *</div>
+    <div class="items-table-wrap">
+      <div class="items-col-header">
         <span>#</span>
-        <span>SKU Code</span>
-        <span>Description</span>
+        <span>Item Name</span>
         <span style="text-align:center">Quantity</span>
         <span>.</span>
       </div>
-      <div id="sku-rows"></div>
-      <div class="sku-footer">
-        <div class="sku-footer-top">
-          <button class="add-sku-btn" onclick="addSkuRow()">
+      <div id="item-rows"></div>
+      <div class="items-footer">
+        <div class="items-footer-top">
+          <button class="add-item-btn" onclick="addItemRow()">
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1v11M1 6.5h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-            Add SKU row
+            Add item
           </button>
-          <span class="sku-count" id="sku-count">0 rows added</span>
+          <span class="item-count" id="item-count">0 items added</span>
         </div>
         <div class="total-qty-bar">
           <span class="total-qty-label">Total Quantity</span>
@@ -488,7 +457,7 @@
     <div class="upload-zone" id="upload-zone">
       <input type="file" id="scan-file" accept="image/*,.pdf" onchange="handleFileSelect(event)">
       <span class="upload-icon">&#128247;</span>
-      <div class="upload-text">Tap to upload or take a photo</div>
+      <div class="upload-text">Tap to upload, drag &amp; drop, or take a photo</div>
       <div class="upload-sub">JPG, PNG, PDF &nbsp;&middot;&nbsp; Max 5MB</div>
     </div>
     <div class="upload-preview" id="upload-preview">
@@ -539,60 +508,49 @@
   // ════════════════════════════════════════════════
   //  ▶ PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE
   // ════════════════════════════════════════════════
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbyS-rl1VkitHFuIiIkO_ME0O_KDF0QkvWDQ5kqFrb_mIrkY-BvSt5yNjdhkU9o4bZh4cw/exec";
+  const SHEET_URL = "YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
   // ════════════════════════════════════════════════
 
-  // ── Logo: embed as base64 so it works offline/anywhere ──
-  // Replace the src below with your actual logo image URL or base64
-  // To use your logo: host the image anywhere (Google Drive, GitHub)
-  // and put the direct image URL here:
-  // document.getElementById("logo-img").src = "YOUR_LOGO_URL_HERE";
-  // OR paste a base64 string directly:
-  // document.getElementById("logo-img").src = "data:image/png;base64,...";
-
-  const SUB_CATS = {
-    Civil:     ["Foundation","Masonry","Concrete","Waterproofing","Finishing","Roofing","Flooring"],
-    Electric:  ["Wiring","Panels & MCB","Lighting","Conduits","Earthing","DB & Fittings","Switches & Sockets"],
-    Plumbing:  ["CPVC Pipes","PVC Pipes","UPVC Pipes","Fittings","Valves","Tanks & Pumps","Drainage"],
-    Paints:    ["Interior Emulsion","Exterior Emulsion","Primer","Putty","Texture","Enamel","Wood Polish"],
-    Furniture: ["Site Furniture","Office Furniture","Fixtures","Doors & Windows","Wardrobes","Hardware Fittings"],
-    Hardware:  ["Fasteners","Tools","Locks & Hinges","Glass & Mirrors","Adhesives","Scaffolding"],
-    Safety:    ["Helmets","Gloves","Harness","Safety Nets","Signs & Boards","First Aid","Footwear"],
-    Office:    ["Stationery","Electronics","Housekeeping","Pantry Supplies","Branding Material","IT Equipment"]
-  };
-
   let selectedFile = null;
-
-  function updateSubCategory() {
-    const cat = document.getElementById("item-category").value;
-    const sel = document.getElementById("sub-category");
-    sel.innerHTML = "";
-    if (!cat) { sel.innerHTML = '<option value="">Select category first</option>'; return; }
-    sel.innerHTML = '<option value="">Select sub-category</option>';
-    (SUB_CATS[cat] || []).forEach(s => {
-      const o = document.createElement("option"); o.value = s; o.textContent = s; sel.appendChild(o);
-    });
-  }
-
   let rowCount = 0;
 
-  function addSkuRow() {
+  // ── Drag & Drop ──
+  const uploadZone = document.getElementById("upload-zone");
+
+  uploadZone.addEventListener("dragover", (e) => {
+    e.preventDefault(); e.stopPropagation();
+    uploadZone.classList.add("drag-over");
+  });
+
+  uploadZone.addEventListener("dragleave", (e) => {
+    e.preventDefault(); e.stopPropagation();
+    uploadZone.classList.remove("drag-over");
+  });
+
+  uploadZone.addEventListener("drop", (e) => {
+    e.preventDefault(); e.stopPropagation();
+    uploadZone.classList.remove("drag-over");
+    const file = e.dataTransfer.files[0];
+    if (file) processFile(file);
+  });
+
+  // ── Item rows ──
+  function addItemRow() {
     rowCount++;
     const n = rowCount;
-    const wrap = document.getElementById("sku-rows");
+    const wrap = document.getElementById("item-rows");
     const row = document.createElement("div");
-    row.className = "sku-row"; row.id = "row-" + n;
-    const len = document.querySelectorAll(".sku-row").length;
+    row.className = "item-row"; row.id = "row-" + n;
+    const len = document.querySelectorAll(".item-row").length;
     row.innerHTML = `
       <span class="row-num">${len + 1}</span>
-      <input type="text" class="sku-code" placeholder="SKU e.g. 025-ELB-CPVC" oninput="updateCount()" autocomplete="off">
-      <input type="text" class="desc" placeholder="Description (optional)">
+      <input type="text" class="item-name" placeholder="Enter item name" oninput="updateCount()" autocomplete="off">
       <input type="number" class="qty" placeholder="Qty" min="1" oninput="updateCount()">
       <button class="remove-btn" onclick="removeRow(${n})" title="Remove">&#215;</button>
     `;
     wrap.appendChild(row);
     updateRowNumbers(); updateCount(); notifyResize();
-    row.querySelector(".sku-code").focus();
+    row.querySelector(".item-name").focus();
   }
 
   function removeRow(id) {
@@ -601,36 +559,44 @@
   }
 
   function updateRowNumbers() {
-    document.querySelectorAll(".sku-row").forEach((r, i) => {
+    document.querySelectorAll(".item-row").forEach((r, i) => {
       const n = r.querySelector(".row-num"); if (n) n.textContent = i + 1;
     });
   }
 
   function updateCount() {
-    const rows = document.querySelectorAll(".sku-row");
+    const rows = document.querySelectorAll(".item-row");
     let filled = 0, totalQty = 0;
     rows.forEach(r => {
-      const sku = r.querySelector(".sku-code").value.trim();
+      const name = r.querySelector(".item-name").value.trim();
       const qty = parseInt(r.querySelector(".qty").value) || 0;
-      if (sku && qty > 0) filled++;
+      if (name && qty > 0) filled++;
       totalQty += qty;
     });
-    const el = document.getElementById("sku-count");
-    el.innerHTML = "<strong>" + rows.length + "</strong> row" + (rows.length !== 1 ? "s" : "") +
+    const el = document.getElementById("item-count");
+    el.innerHTML = "<strong>" + rows.length + "</strong> item" + (rows.length !== 1 ? "s" : "") +
       (filled > 0 ? " &nbsp;&#183;&nbsp; <strong>" + filled + "</strong> complete" : "");
     const numEl = document.getElementById("total-qty-number");
     numEl.textContent = totalQty;
     numEl.classList.toggle("zero", totalQty === 0);
   }
 
+  // ── File handling ──
   function handleFileSelect(e) {
     const file = e.target.files[0];
-    if (!file) return;
+    if (file) processFile(file);
+  }
+
+  function processFile(file) {
     if (file.size > 5 * 1024 * 1024) { showToast("File too large. Max 5MB allowed.", "error"); return; }
+    const allowed = ["image/jpeg","image/png","image/gif","image/webp","application/pdf"];
+    if (!allowed.includes(file.type) && !file.type.startsWith("image/")) {
+      showToast("Only JPG, PNG, PDF files are allowed.", "error"); return;
+    }
     selectedFile = file;
     document.getElementById("file-name-display").textContent = file.name + " (" + (file.size / 1024).toFixed(0) + " KB)";
-    document.getElementById("upload-zone").classList.add("has-file");
-    document.getElementById("upload-zone").querySelector(".upload-text").textContent = "File selected ✓";
+    uploadZone.classList.add("has-file");
+    uploadZone.querySelector(".upload-text").textContent = "File selected ✓";
     const preview = document.getElementById("upload-preview");
     const img = document.getElementById("preview-img");
     if (file.type.startsWith("image/")) {
@@ -638,7 +604,8 @@
       reader.onload = (ev) => { img.src = ev.target.result; img.style.display = "block"; preview.style.display = "block"; notifyResize(); };
       reader.readAsDataURL(file);
     } else {
-      img.style.display = "none"; img.src = ""; preview.style.display = "block"; notifyResize();
+      img.style.display = "none"; img.src = "";
+      preview.style.display = "block"; notifyResize();
     }
   }
 
@@ -648,8 +615,8 @@
     document.getElementById("upload-preview").style.display = "none";
     document.getElementById("preview-img").src = "";
     document.getElementById("file-name-display").textContent = "—";
-    document.getElementById("upload-zone").classList.remove("has-file");
-    document.getElementById("upload-zone").querySelector(".upload-text").textContent = "Tap to upload or take a photo";
+    uploadZone.classList.remove("has-file");
+    uploadZone.querySelector(".upload-text").textContent = "Tap to upload, drag & drop, or take a photo";
     notifyResize();
   }
 
@@ -672,40 +639,36 @@
   function resetForm() {
     if (!confirm("Reset all form fields? This cannot be undone.")) return;
     ["project","item-category","req-no","req-date","filled-by","notes"].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = "";
+      const el = document.getElementById(id); if (el) el.value = "";
     });
-    updateSubCategory();
     document.getElementById("p-regular").checked = true;
-    document.getElementById("sku-rows").innerHTML = "";
+    document.getElementById("item-rows").innerHTML = "";
     rowCount = 0; updateCount(); removeFile();
     document.getElementById("submit-status").textContent = "Fill all required fields (*) to submit";
-    addSkuRow(); notifyResize();
+    addItemRow(); notifyResize();
   }
 
   function collectItems() {
-    const rows = document.querySelectorAll(".sku-row");
+    const rows = document.querySelectorAll(".item-row");
     const items = []; let hasError = false;
     rows.forEach(r => {
-      const sku = r.querySelector(".sku-code").value.trim();
-      const desc = r.querySelector(".desc").value.trim();
+      const name = r.querySelector(".item-name").value.trim();
       const qty = parseInt(r.querySelector(".qty").value);
-      if (sku && qty > 0) items.push({ sku, desc, qty });
-      else if (sku || r.querySelector(".qty").value.trim()) hasError = true;
+      if (name && qty > 0) items.push({ name, qty });
+      else if (name || r.querySelector(".qty").value.trim()) hasError = true;
     });
     return { items, hasError };
   }
 
   function getTotalQty() {
     let total = 0;
-    document.querySelectorAll(".sku-row").forEach(r => { total += parseInt(r.querySelector(".qty").value) || 0; });
+    document.querySelectorAll(".item-row").forEach(r => { total += parseInt(r.querySelector(".qty").value) || 0; });
     return total;
   }
 
   async function submitForm() {
     const project  = document.getElementById("project").value;
     const category = document.getElementById("item-category").value;
-    const subCat   = document.getElementById("sub-category").value;
     const reqNo    = document.getElementById("req-no").value.trim();
     const reqDate  = document.getElementById("req-date").value;
     const filledBy = document.getElementById("filled-by").value;
@@ -715,9 +678,9 @@
     const { items, hasError } = collectItems();
 
     if (!project || !category || !reqDate || !filledBy) { showToast("Please fill: Project, Category, Date and Filled By", "error"); return; }
-    if (!reqNo) { showToast("Please enter Req. No. (PO Number)", "error"); return; }
-    if (items.length === 0) { showToast("Add at least one SKU with quantity", "error"); return; }
-    if (hasError) { showToast("Some SKU rows are incomplete — complete or remove them", "error"); return; }
+    if (!reqNo) { showToast("Please enter Requisition No.", "error"); return; }
+    if (items.length === 0) { showToast("Add at least one item with quantity", "error"); return; }
+    if (hasError) { showToast("Some item rows are incomplete — complete or remove them", "error"); return; }
     if (!selectedFile) { showToast("Please upload the scanned copy of requisition", "error"); return; }
 
     const btn = document.getElementById("submit-btn");
@@ -736,9 +699,8 @@
 
       const payload = {
         reqNo, project, category,
-        subCategory: subCat, requiredDate: reqDate,
-        filledBy, priority, notes,
-        items: items.map(i => i.sku + " × " + i.qty + (i.desc ? " (" + i.desc + ")" : "")).join(" | "),
+        requiredDate: reqDate, filledBy, priority, notes,
+        items: items.map(i => i.name + " × " + i.qty).join(" | "),
         itemsJson: JSON.stringify(items),
         totalQty,
         timestamp: new Date().toISOString(),
@@ -766,10 +728,9 @@
       ["project","item-category","req-no","req-date","notes"].forEach(id => {
         const el = document.getElementById(id); if (el) el.value = "";
       });
-      updateSubCategory();
       document.getElementById("p-regular").checked = true;
-      document.getElementById("sku-rows").innerHTML = "";
-      rowCount = 0; addSkuRow(); updateCount(); removeFile(); notifyResize();
+      document.getElementById("item-rows").innerHTML = "";
+      rowCount = 0; addItemRow(); updateCount(); removeFile(); notifyResize();
 
     } catch (err) {
       clearInterval(ticker); prog.style.display = "none"; progBar.style.width = "0%";
@@ -790,7 +751,7 @@
   window.addEventListener('resize', notifyResize);
   new MutationObserver(notifyResize).observe(document.body, { childList: true, subtree: true, attributes: true });
 
-  addSkuRow();
+  addItemRow();
 </script>
 </body>
 </html>
