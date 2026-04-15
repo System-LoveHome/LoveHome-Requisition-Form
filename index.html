@@ -404,7 +404,7 @@
     </div>
     <div class="grid-2">
       <div class="field">
-        <label>Filled By *</label>
+        <label>Requested By *</label>
         <select id="filled-by">
           <option value="">Select person</option>
           <option value="Store Manager">Store Manager</option>
@@ -677,7 +677,7 @@
     const totalQty = getTotalQty();
     const { items, hasError } = collectItems();
 
-    if (!project || !category || !reqDate || !filledBy) { showToast("Please fill: Project, Category, Date and Filled By", "error"); return; }
+    if (!project || !category || !reqDate || !filledBy) { showToast("Please fill: Project, Category, Date and Requested By", "error"); return; }
     if (!reqNo) { showToast("Please enter Requisition No.", "error"); return; }
     if (items.length === 0) { showToast("Add at least one item with quantity", "error"); return; }
     if (hasError) { showToast("Some item rows are incomplete — complete or remove them", "error"); return; }
